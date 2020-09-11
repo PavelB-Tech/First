@@ -7,6 +7,7 @@ def run_game():
     # initialize the game
     pygame.init()
     fg_settings = Settings()
+    fg_settings.load_settings()
     screen = pygame.display.set_mode((fg_settings.screen_width, fg_settings.screen_height))
     pygame.display.set_caption('First Game')
 
