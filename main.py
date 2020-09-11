@@ -1,14 +1,20 @@
 import sys
 import pygame
-from settings import Settings
+from configparser import ConfigParser
+
 
 
 def run_game():
     # initialize the game
     pygame.init()
-    fg_settings = Settings()
-    fg_settings.load_settings()
-    screen = pygame.display.set_mode((fg_settings.screen_width, fg_settings.screen_height))
+
+    config = ConfigParser()
+    config.read('src/config.ini')
+
+    screen = pygame.display.set_mode((config.getint('window', 'width'), config.getint('window', 'height')))
+    bg_color = (config.getint('window', 'bg_color_r'), config.getint('window', 'bg_color_g'),
+                config.getint('window', 'bg_color_b'))
+
     pygame.display.set_caption('First Game')
 
     while True:
@@ -16,7 +22,7 @@ def run_game():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        screen.fill(fg_settings.bg_color)
+        screen.fill(bg_color)
         pygame.display.flip()
 
 
